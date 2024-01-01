@@ -1,24 +1,27 @@
 class Solution {
 public:
-    int findContentChildren(vector<int>& g, vector<int>& s) {
-        int cookiesNums = s.size();
-        if(cookiesNums == 0)  return 0;
-        sort(g.begin(), g.end());
-        sort(s.begin(), s.end());
-
-        int maxNum = 0;
-        int cookieIndex = cookiesNums - 1;
-        int childIndex = g.size() - 1;
-        while(cookieIndex >= 0 && childIndex >=0){
-            if(s[cookieIndex] >= g[childIndex]){
-                maxNum++;
-                cookieIndex--;
-                childIndex--;
+    int findContentChildren(std::vector<int>& g, std::vector<int>& s) {
+        // Sort the arrays
+        std::sort(g.begin(), g.end());
+        std::sort(s.begin(), s.end());
+        
+        // Initialize count for tracking assignments of cookies
+        int count = 0;
+        // Initialize two pointers i and j to iterate on g and s
+        int i = 0, j = 0;
+        
+        // Iterate through the arrays
+        while (i < g.size() && j < s.size()) {
+            // If the size of the cookie is greater than or equal to the child's greed,
+            // assign the cookie to the child and move both pointers
+            if (g[i] <= s[j]) {
+                count++;
+                i++;
             }
-            else{
-                childIndex--;
-            }
+            // Move the cookie pointer to the next cookie, regardless of assignment
+            j++;
         }
-        return maxNum;
+        
+        return count;
     }
 };

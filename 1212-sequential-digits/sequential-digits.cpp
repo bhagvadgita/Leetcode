@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> sequentialDigits(int low, int high) {
         vector<int> ans;
-        for (int i=1; i<=9; i++){
+        for (int i=1; i<=9; ++i){
             int num=i;
             int nextdigit=i+1;
             while (num<=high && nextdigit<=9){
@@ -10,7 +10,7 @@ public:
                 if (num<=high && num>=low){
                     ans.push_back(num);
                 }
-                nextdigit++;
+                ++nextdigit;
             }
         }
         sort(ans.begin(), ans.end());

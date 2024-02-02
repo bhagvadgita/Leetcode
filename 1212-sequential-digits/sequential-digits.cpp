@@ -1,20 +1,19 @@
 class Solution {
 public:
     vector<int> sequentialDigits(int low, int high) {
-        vector<int> a;
-
-        for (int i = 1; i <= 9; ++i) {
-            int num = i;
-            int nextDigit = i + 1;
-
-            while (num <= high && nextDigit <= 9) {
-                num = num * 10 + nextDigit;
-                if (low <= num && num <= high) a.push_back(num);
-                ++nextDigit;
+        vector<int> ans;
+        for (int i=1; i<=9; i++){
+            int num=i;
+            int nextdigit=i+1;
+            while (num<=high && nextdigit<=9){
+                num=num*10+nextdigit;
+                if (num<=high && num>=low){
+                    ans.push_back(num);
+                }
+                nextdigit++;
             }
         }
-
-        sort(a.begin(), a.end());
-        return a;
+        sort(ans.begin(), ans.end());
+        return ans;
     }
 };

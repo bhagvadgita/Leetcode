@@ -11,19 +11,12 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* current = head;
-        int n = 0;
-        while (current!=nullptr){
-            n++;
-            current = current->next;
+        ListNode* left = head;
+        ListNode* right = head;
+        while (right && right->next){
+            left = left->next;
+            right = right->next->next;
         }
-        current = head;
-        int count = 0;
-        n = (n/2) ;
-        while (count<n){
-            count++;
-            current = current->next;
-        }
-        return current;
+        return left;
     }
 };

@@ -12,21 +12,21 @@ class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head || !head->next) return;
-        vector<ListNode*> vec;
+        vector<ListNode*> arr;
         ListNode* curr = head;
         while (curr){
-            vec.push_back(curr);
+            arr.push_back(curr);
             curr = curr->next;
         }
         int i = 0;
-        int j = vec.size()-1;
+        int j = arr.size()-1;
         while (i<j){
-            vec[i]->next = vec[j];
+            arr[i]->next = arr[j];
             i++;
             if (i==j) break;
-            vec[j]->next = vec[i];
-            j--;
+            arr[j]->next = arr[i];
+            j--; 
         }
-        vec[i]->next = nullptr;
+        arr[j]->next = nullptr;
     }
 };

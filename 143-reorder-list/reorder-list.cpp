@@ -1,32 +1,39 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+
 class Solution {
 public:
     void reorderList(ListNode* head) {
         if (!head || !head->next) return;
-        vector<ListNode*> arr;
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while (fast){
+            fast = fast->next;
+            if (fast){
+                fast = fast->next;
+                slow = slow->next;
+            }
+        }
+        ListNode* mid = slow->next;
+        slow->next = NULL;
+        mid = reverseList(mid);
+        slow = head;
+        while (mid){
+            ListNode* Next = slow->next;
+            ListNode* mid_next = mid->next;
+            slow->next = mid;
+            mid->next = Next;
+            slow = Next;
+            mid = mid_next;
+        }
+    }
+    ListNode* reverseList(ListNode* head){
         ListNode* curr = head;
+        ListNode* prev = NULL;
         while (curr){
-            arr.push_back(curr);
-            curr = curr->next;
+            ListNode* Next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = Next;
         }
-        int i = 0;
-        int j = arr.size()-1;
-        while (i<j){
-            arr[i]->next = arr[j];
-            i++;
-            if (i==j) break;
-            arr[j]->next = arr[i];
-            j--; 
-        }
-        arr[j]->next = nullptr;
+        return prev;
     }
 };

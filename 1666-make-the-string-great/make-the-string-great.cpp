@@ -1,20 +1,16 @@
 class Solution {
 public:
-    string makeGood(string s) {
-        stack<char> st;
-        for (char ch : s){
-            if (!st.empty() && abs(ch-st.top())==32){
-                st.pop();
-            }
-            else{
-                st.push(ch);
+    string makeGood(string s) 
+    {
+        string res;
+        for (char c : s) {
+            if (!res.empty() && (toupper(c) == toupper(res.back())) && (c - res.back() != 0)) {
+                res.pop_back();
+            } else {
+                res.push_back(c);
             }
         }
-        string ans = "";
-        while (!st.empty()){
-            ans = st.top() + ans;
-            st.pop();
-        }
-        return ans;
+        
+        return res;
     }
 };

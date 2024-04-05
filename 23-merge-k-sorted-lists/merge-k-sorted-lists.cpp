@@ -11,24 +11,24 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        ListNode* ans = NULL;
-        for (int i = 0; i<lists.size(); i++){
-            ans = merge_list(ans,lists[i]);
+        vector<int> arr;
+        ListNode* temp(NULL);
+        for (int i=0; i<lists.size(); i++){
+            temp = lists[i];
+            while (temp){
+                arr.push_back(temp->val);
+                temp = temp->next;
+            }
         }
-        return ans;
-    }
-    ListNode* merge_list(ListNode* list1, ListNode* list2){
-        if (!list1) return list2;
-        if (!list2) return list1;
-        ListNode* result = NULL;
-        if (list1->val < list2->val){
-            result = list1;
-            result->next = merge_list(list1->next, list2);    
+        if (arr.empty()) return nullptr;
+        sort(arr.begin(),arr.end());
+        ListNode* head = new ListNode(arr[0]);
+        temp = head;
+        for (int i=1; i<arr.size(); i++){
+            ListNode* Node = new ListNode(arr[i]);
+            temp->next = Node;
+            temp = temp->next;
         }
-        else{
-            result = list2;
-            result->next = merge_list(list1,list2->next);
-        }
-        return result;
+        return head;
     }
 };

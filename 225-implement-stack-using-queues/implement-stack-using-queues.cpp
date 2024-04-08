@@ -1,32 +1,21 @@
 class MyStack {
 public:
-    queue<int> q;
+    deque<int> q;
     MyStack() {
     }
     
     void push(int x) {
-        if (q.empty()){
-            q.push(x);
-            return;
-        }
-        q.push(x);
-        int s = q.size();
-        for (int i = 1; i<s; i++){
-            q.push(q.front());
-            q.pop();
-        }
+        q.push_back(x);
     }
     
     int pop() {
-        if (q.empty()) return -1;
-        int temp = q.front();
-        q.pop();
+        int temp = q.back();
+        q.pop_back();
         return temp;
     }
     
     int top() {
-        if (q.empty()) return -1;
-        return q.front();
+        return q.back();
     }
     
     bool empty() {

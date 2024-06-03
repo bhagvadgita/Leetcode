@@ -12,12 +12,6 @@ public:
                 i++;
             }
         }
-        if (i==s.size()){
-            if (j==t.size()) return 0;
-            else return t.size()-j;
-        }
-        else{
-            return 0;
-        }
+        return t.size()-j;
     }
 };

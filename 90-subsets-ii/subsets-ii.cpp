@@ -1,17 +1,43 @@
 class Solution {
 public:
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        set<vector<int>> res={{}};
-        for (int i = 0; i<nums.size(); i++){
-            int n = res.size();
-            vector<vector<int>> currsubsets(res.begin(),res.end());
-            for (auto elem: currsubsets){
-                elem.push_back(nums[i]);
-                res.insert(elem);
-            }
+    void func(vector<vector<int>>&ans,vector<int>ds,vector<int>&arr,int ind){
+//         ios_base::sync_with_stdio(false);
+// cin.tie(NULL);
+
+        int n=arr.size();
+
+            ans.push_back(ds);
+
+
+        for(int i=ind; i<n; i++){
+              if(i>ind && arr[i]==arr[i-1]) continue;
+
+                ds.push_back(arr[i]);
+                func(ans,ds,arr,i+1);
+                ds.pop_back();
+
+                
+
         }
-        vector<vector<int>> ans(res.begin(),res.end());
+           
+
+    }
+
+
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+cin.tie(NULL);
+
+        vector<vector<int>>ans;
+
+        vector<int>ds;
+        sort(nums.begin(),nums.end());
+
+        func(ans,ds,nums,0);
         return ans;
+
+
+        
     }
 };

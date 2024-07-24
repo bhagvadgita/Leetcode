@@ -1,23 +1,12 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        //Dutch national flag problem (red, white, blue)
-        const char red=0, white=1, blue=2;
-        int l=0, m=0, r=nums.size()-1;// pointers to partition
-        while(m<=r){
-            switch(nums[m]){
-                case red:
-                    swap(nums[l], nums[m]);
-                    l++, m++;
-                    break;
-                case white:
-                    m++;
-                    break;
-                case blue:
-                    swap(nums[m], nums[r]);
-                    r--;
+        int n = nums.size();
+        for (int i = 0; i<n-1; i++){
+            for (int j = 0; j<n-i-1; j++){
+                if (nums[j]>=nums[j+1]) swap(nums[j],nums[j+1]);
             }
         }
+
     }
 };
-

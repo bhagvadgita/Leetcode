@@ -3,24 +3,33 @@ public:
     void setZeroes(vector<vector<int>>& matrix) {
         int row = matrix.size();
         int col = matrix[0].size();
-        queue<pair<int,int>> q;
+        vector<pair<int,int>> zero;
         for (int i = 0; i<row; i++){
             for (int j = 0; j<col; j++){
-                if (matrix[i][j]==0){
-                    q.push({i,j});
-                }
+                if (matrix[i][j]==0) zero.push_back({i,j});
             }
         }
-        while (!q.empty()){
-            auto num = q.front();
-            q.pop();
-            int i = num.first;
-            int j = num.second;
-            for (int k = 0; k<col; k++){
-                matrix[i][k]=0;
+        for (pair<int,int> coord: zero){
+            int x = coord.first;
+            int y = coord.second;
+            while (x>=0){
+                matrix[x][y] = 0;
+                x--;
             }
-            for (int k = 0; k<row; k++){
-                matrix[k][j]=0;
+            x=0;
+            while (x<row){
+                matrix[x][y] = 0;
+                x++;
+            }
+            x = coord.first;
+            while (y>=0){
+                matrix[x][y] = 0;
+                y--;
+            }
+            y=0;
+            while (y<col){
+                matrix[x][y] = 0;
+                y++;
             }
         }
     }

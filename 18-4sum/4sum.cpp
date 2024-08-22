@@ -10,7 +10,7 @@ public:
                 int l = nums.size()-1;
                 long long temp = (long long)target-(long long)nums[i]-(long long)nums[j];
                 while (k<l){
-                    long long sum = nums[k]+nums[l];
+                    long long sum = (long long)nums[k]+(long long)nums[l];
                     if (sum==temp){
                         ans.insert({nums[i],nums[j],nums[k],nums[l]});
                         k++;

@@ -1,11 +1,19 @@
 class Solution {
 public:
-    int strStr(std::string haystack, std::string needle) {
-        if (haystack.size()<needle.size()) return -1;
-        for (int i = 0; i <= haystack.length() - needle.length(); ++i) {
-            if (haystack.substr(i, needle.length()) == needle) {
-                return i;
+    int strStr(string haystack, string needle) {
+        int i = 0;
+        int j = 0;
+        while (i<haystack.size()){
+            if (haystack[i]==needle[j]){
+                int k = i;
+                while (k<haystack.size() && j<needle.size() && haystack[k]==needle[j]){
+                    k++;
+                    j++;
+                }
+                if (j == needle.size()) return i;
+                else j =0;
             }
+            i++;
         }
         return -1;
     }
